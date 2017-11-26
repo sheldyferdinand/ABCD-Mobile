@@ -1,0 +1,59 @@
+{
+  "survey_properties": {
+    "intro_message": "<strong>Your feedback helps us to fight against cancer.</strong><br><br><br>   Hello, we are from xxx and we need your feedback to understand yyy. You'll go through 5 questions and it will take less than 2 minutes to complete the questionnaire.",
+    "end_message": "Thank you for having the time to take our questionnaire. May God be with you.",
+    "skip_intro": false
+  },
+  "questions": [
+    {
+      "question_type": "Checkboxes",
+      "question_title": "What should we ask in the first question?",
+      "description": "(Select all that apply)",
+      "required": false,
+      "random_choices": false,
+      "choices": [
+        "thing #1",
+        "thing #2",
+        "thing #3",
+        "thing #4"
+      ]
+    },
+    {
+      "question_type": "Checkboxes",
+      "question_title": "What should we ask in the second question?",
+      "description": "",
+      "required": false,
+      "random_choices": true,
+      "choices": [
+        "<font color='#AA0000'>Ask about <strong>thing 1</strong></font>",
+        "Ask about <font color='#00AA00'>thing 2</font>",
+        "Ask about <font color='#0000AA'><strong>thing 3</strong></font>"
+      ]
+    },
+    {
+      "question_type": "String",
+      "question_title": "What should we ask in the third question?",
+      "description": "",
+      "required": false
+    },
+    {
+      "question_title": "Answer this one with number!",
+      "description": "",
+      "required": false,
+      "question_type": "Number"
+    },
+    {
+      "question_type": "StringMultiline",
+      "question_title": "This is the last question, why is this questionnaire so simple? How could we fight cancer by doing such questionnaire? LOL XD",
+      "description": "",
+      "required": false,
+      "number_of_lines": 4
+    }
+    {
+      "question_type": "TakePhoto",
+      "question_title": "Please kindly take a picture of your room.",
+      "description": "",
+      "required": false,
+    }
+  ]
+}
