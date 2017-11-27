@@ -1,5 +1,8 @@
 package proyekpakdani.abcd.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by SLD on 14-Sep-17.
  */
@@ -7,18 +10,27 @@ package proyekpakdani.abcd.models;
 public class QuestionnaireContent {
 
 
-    private int id;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private String created;
-    private String updated;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("welcome")
+    @Expose
     private String welcome;
+    @SerializedName("goodbye")
+    @Expose
     private String goodbye;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -30,20 +42,12 @@ public class QuestionnaireContent {
         this.name = name;
     }
 
-    public String getCreated() {
-        return created;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(String updated) {
-        this.updated = updated;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getWelcome() {

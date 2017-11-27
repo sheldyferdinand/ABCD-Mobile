@@ -31,15 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         this.projects = arrayList;
         this.filteredList = arrayList;
         this.context = context;
-//        getSurvey();
     }
-
-//    private void getSurvey(){
-//        ArrayList<Isi> surveys = new ArrayList<>();
-//        for (Isi isi : projects){
-//            surveys.addAll(isi.getSurveyLink());
-//        }
-//    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,9 +42,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Isi isi = filteredList.get(position);
+        int endIndex = isi.getUpdated().length() - 14;
+
         holder.txtjudul.setText(isi.getName());
-        holder.txtdesc.setText(isi.getDesc());
-        holder.txttanggal.setText("Last updated: " + isi.getUpdated());
+        holder.txtdesc.setText(isi.getDescription());
+        holder.txttanggal.setText("Last updated: " + isi.getUpdated().substring(0, endIndex));
 
         holder.cardView.setOnClickListener(new View.OnClickListener(){
 
@@ -60,7 +54,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Questionnaire.class);
-                intent.putExtra("surveyLink", isi.getSurveys().get(0).toString());
+                intent.putExtra("surveyID", isi.getId().toString());
+//                intent.putExtra("surveyLink", isi.getSurveys().get(0).toString());
                 context.startActivity(intent);
             }
 

@@ -31,7 +31,7 @@
                 />
 
             <TextView
-                android:id="@+id/TanggalQuestionnaire"
+                android:id="@+id/DeskripsiQuestionnaire"
                 android:layout_below="@+id/JudulQuestionnaire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

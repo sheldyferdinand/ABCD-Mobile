@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dashboard extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    public static final String BASE_URL = "https://my-json-server.typicode.com/";
+    public static final String BASE_URL = "http://admin.odc-abcd.com/";
     private RecyclerView recyclerView;
     private Toolbar toolbar;
     private MyAdapter adapter;
@@ -63,7 +63,7 @@ public class Dashboard extends AppCompatActivity implements SwipeRefreshLayout.O
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         isiList = new ArrayList<>();
-        adapter = new MyAdapter(isiList,Dashboard.this);
+        adapter = new MyAdapter(isiList, Dashboard.this);
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setOnRefreshListener(this);
     }
@@ -74,50 +74,53 @@ public class Dashboard extends AppCompatActivity implements SwipeRefreshLayout.O
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    private void loadJSON(){
+    private void loadJSON() {
         if (isOnline()) {
             swipeRefreshLayout.setRefreshing(true);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Interface request = retrofit.create(Interface.class);
-        Call<List<Isi>> call = request.getProjects("andikawhy/abcd_api/projects");
-        call.enqueue(new Callback<List<Isi>>() {
-            @Override
-            public void onResponse(Call<List<Isi>> call, Response<List<Isi>> response) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            Interface request = retrofit.create(Interface.class);
+            Call<List<Isi>> call = request.getProjects("api/project/user/1");
+            call.enqueue(new Callback<List<Isi>>() {
+                @Override
+                public void onResponse(Call<List<Isi>> call, Response<List<Isi>> response) {
 
-                List<Isi> list = response.body();
-                Isi isi;
-                if (list.size() != 0) {
-                    for (int i = 0; i < list.size(); i++) {
-                        isi = new Isi();
-                        isi.setName(list.get(i).getName());
-                        isi.setDesc(list.get(i).getDesc());
-                        isi.setUpdated(list.get(i).getUpdated());
-                        isi.setSurveys(list.get(i).getSurveys());
-                        isiList.add(isi);
+                    List<Isi> list = response.body();
+                    Isi isi;
+                    if (list.size() != 0) {
+                        for (int i = 0; i < list.size(); i++) {
+                            isi = new Isi();
+                            if (list.get(i).getStatus() == 1 && list.get(i).getIsDeleted() == 0) {
+                                isi.setName(list.get(i).getName());
+                                isi.setDescription(list.get(i).getDescription());
+                                isi.setUpdated(list.get(i).getUpdated());
+                                isi.setId(list.get(i).getId());
+//                        isi.setSurveys(list.get(i).getSurveys());
+                                isiList.add(isi);
+                            }
+                        }
                     }
+                    adapter.notifyDataSetChanged();
+
+                    swipeRefreshLayout.setRefreshing(false);
                 }
-                adapter.notifyDataSetChanged();
 
-                swipeRefreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onFailure(Call<List<Isi>> call, Throwable t) {
-                Log.d("Error", t.getMessage());
-            }
-        });}
-    else
-        {
+                @Override
+                public void onFailure(Call<List<Isi>> call, Throwable t) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Log.d("Error", t.getMessage());
+                }
+            });
+        } else {
             try {
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
                 alertDialog.setTitle("Info");
                 alertDialog.setMessage("Internet not available, Cross check your internet connectivity and try again");
                 alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -125,9 +128,7 @@ public class Dashboard extends AppCompatActivity implements SwipeRefreshLayout.O
                     }
                 });
                 alertDialog.show();
-            }
-            catch(Exception e)
-            {
+            } catch (Exception e) {
                 //Log.d(Constants.TAG, "Show Dialog: "+e.getMessage());
             }
         }
@@ -177,7 +178,7 @@ public class Dashboard extends AppCompatActivity implements SwipeRefreshLayout.O
         });
     }
 
-    private void setSwipeRefreshLayout(){
+    private void setSwipeRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
                                     @Override

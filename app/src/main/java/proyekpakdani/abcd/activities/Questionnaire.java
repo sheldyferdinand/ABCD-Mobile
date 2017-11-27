@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Questionnaire extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    public static final String BASE_URL = "https://my-json-server.typicode.com/";
+    public static final String BASE_URL = "http://admin.odc-abcd.com/";
     private RecyclerView recyclerView;
     private Toolbar toolbar;
     private QuestionnaireAdapter adapter;
@@ -82,13 +82,12 @@ public class Questionnaire extends AppCompatActivity implements SwipeRefreshLayo
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             Interface request = retrofit.create(Interface.class);
-
-            int removedFront = BASE_URL.length();
-            String link = getIntent().getStringExtra("surveyLink").substring(removedFront);
-
-
-            if(link != null && !link.isEmpty()) {
-                Call<List<QuestionnaireContent>> call = request.getQuestionnaire(link);
+//            int removedFront = BASE_URL.length();
+//            String link = getIntent().getStringExtra("surveyLink").substring(removedFront);
+//
+//
+//            if(link != null && !link.isEmpty()) {
+                Call<List<QuestionnaireContent>> call = request.getQuestionnaire("api/survey/project/144");
                 call.enqueue(new Callback<List<QuestionnaireContent>>() {
                                  @Override
                                  public void onResponse(Call<List<QuestionnaireContent>> call, Response<List<QuestionnaireContent>> response) {
@@ -99,7 +98,7 @@ public class Questionnaire extends AppCompatActivity implements SwipeRefreshLayo
                                          for (int i = 0; i < list.size(); i++) {
                                              isi = new QuestionnaireContent();
                                              isi.setName(list.get(i).getName());
-                                             isi.setUpdated(list.get(i).getUpdated());
+                                             isi.setDescription(list.get(i).getDescription());
                                              isiList.add(isi);
 
                                          }
@@ -111,11 +110,12 @@ public class Questionnaire extends AppCompatActivity implements SwipeRefreshLayo
 
                                  @Override
                                  public void onFailure(Call<List<QuestionnaireContent>> call, Throwable t) {
+                                     swipeRefreshLayout.setRefreshing(false);
                                      Log.d("Error", t.getMessage());
                                  }
                              }
                 );
-            }
+//            }
         }
         else
         {

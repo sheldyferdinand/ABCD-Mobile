@@ -49,11 +49,11 @@
       "required": false,
       "number_of_lines": 4
     }
-    {
-      "question_type": "TakePhoto",
-      "question_title": "Please kindly take a picture of your room.",
-      "description": "",
-      "required": false,
-    }
+//    {
+//      "question_type": "TakePhoto",
+//      "question_title": "Please kindly take a picture of your room.",
+//      "description": "",
+//      "required": false,
+//    }
   ]
 }

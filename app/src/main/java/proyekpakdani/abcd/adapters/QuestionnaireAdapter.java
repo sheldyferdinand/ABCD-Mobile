@@ -56,7 +56,7 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
     public void onBindViewHolder(final ViewHolder holder, int position) {
         QuestionnaireContent content = filteredList.get(position);
         holder.txtjudul.setText(content.getName());
-        holder.txttanggal.setText("Last updated: " + content.getUpdated());
+        holder.txtdesc.setText(content.getDescription());
 
         holder.shareMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,14 +122,14 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView txtjudul;
-        public TextView txttanggal;
+        public TextView txtdesc;
         public TextView shareMenu;
         private CardView cardView;
 
         public ViewHolder (View itemView){
             super(itemView);
             txtjudul = (TextView) itemView.findViewById(R.id.JudulQuestionnaire);
-            txttanggal = (TextView) itemView.findViewById(R.id.TanggalQuestionnaire);
+            txtdesc = (TextView) itemView.findViewById(R.id.DeskripsiQuestionnaire);
             shareMenu = (TextView) itemView.findViewById(R.id.textViewOptions);
             cardView = (CardView) itemView.findViewById(R.id.CardQuestionnaire);
         }

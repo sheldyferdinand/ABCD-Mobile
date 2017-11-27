@@ -1,5 +1,8 @@
 package proyekpakdani.abcd.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +14,30 @@ import java.util.List;
 public class Isi {
 
 
-    private int id;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private String desc;
-    private Boolean status;
-    private Boolean isDeleted;
-    private String created;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("status")
+    @Expose
+    private Integer status;
+    @SerializedName("isDeleted")
+    @Expose
+    private Integer isDeleted;
+    @SerializedName("updated")
+    @Expose
     private String updated;
-    public ArrayList<String> surveys;
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,36 +49,28 @@ public class Isi {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Boolean getDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public String getUpdated() {
@@ -75,14 +79,6 @@ public class Isi {
 
     public void setUpdated(String updated) {
         this.updated = updated;
-    }
-
-    public ArrayList<String> getSurveys() {
-        return surveys;
-    }
-
-    public void setSurveys(ArrayList<String> surveys) {
-        this.surveys = surveys;
     }
 }
 
