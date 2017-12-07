@@ -82,12 +82,13 @@ public class Questionnaire extends AppCompatActivity implements SwipeRefreshLayo
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             Interface request = retrofit.create(Interface.class);
+            String surveyID = getIntent().getStringExtra("surveyID");
 //            int removedFront = BASE_URL.length();
 //            String link = getIntent().getStringExtra("surveyLink").substring(removedFront);
 //
 //
 //            if(link != null && !link.isEmpty()) {
-                Call<List<QuestionnaireContent>> call = request.getQuestionnaire("api/survey/project/144");
+                Call<List<QuestionnaireContent>> call = request.getQuestionnaire("api/survey/project/" + surveyID);
                 call.enqueue(new Callback<List<QuestionnaireContent>>() {
                                  @Override
                                  public void onResponse(Call<List<QuestionnaireContent>> call, Response<List<QuestionnaireContent>> response) {
